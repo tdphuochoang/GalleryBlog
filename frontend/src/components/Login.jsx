@@ -3,9 +3,30 @@ import { useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import videoBackground from "../image/background-video.mp4";
 import { GoogleLogin, googleLogout } from "@react-oauth/google";
+import jwt_decode from "jwt-decode";
+
+import { client } from "../client";
 
 const Login = () => {
 	const user = false;
+	const navigate = useNavigate();
+
+	const responseGoogle = (response) => {
+		const decode = jwt_decode(response.credential);
+		localStorage.setItem("user", JSON.stringify(decode));
+		const { name, email, picture, sub } = decode;
+		const doc = {
+			_id: sub,
+			_type: "user",
+			userName: name,
+			image: picture,
+		};
+
+		client.createIfNotExists(doc).then(() => {
+			navigate("/", { replace: true });
+		});
+	};
+
 	return (
 		<div className="flex justify-start items-center flex-col h-screen">
 			<div className="relative w-full h-full">
@@ -29,7 +50,7 @@ const Login = () => {
 							<div>Logged In</div>
 						) : (
 							<GoogleLogin
-								onSuccess={(response) => console.log(response)}
+								onSuccess={responseGoogle}
 								onError={() => console.log("Error")}
 							/>
 						)}
