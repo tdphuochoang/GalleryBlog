@@ -4,7 +4,7 @@ import { FcGoogle } from "react-icons/fc";
 import videoBackground from "../image/background-video.mp4";
 import { GoogleLogin, googleLogout } from "@react-oauth/google";
 import jwt_decode from "jwt-decode";
-
+import logo from "../image/galleria-logo-white.png";
 import { client } from "../client";
 
 const Login = () => {
@@ -42,7 +42,7 @@ const Login = () => {
 
 				<div className="absolute flex flex-col justify-center items-center top-0 right-0 left-0 bottom-0 bg-blackOverlay">
 					<div className="p-5">
-						<img src="" width="130px" alt="logo" />
+						<img src={logo} width="150px" alt="logo" />
 					</div>
 
 					<div className="shadow-2xl">
