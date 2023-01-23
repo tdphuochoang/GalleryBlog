@@ -20,8 +20,11 @@ const Home = () => {
 	const scrollRef = useRef(null);
 
 	useEffect(() => {
-		const query = userQuery(userInfo?.googleId);
-		client.fetch(query).then((data) => setUser(data[0]));
+		console.log(userInfo?.sub);
+		const query = userQuery(userInfo?.sub);
+		client.fetch(query).then((data) => {
+			setUser(data[0]);
+		});
 	}, []);
 
 	useEffect(() => {
