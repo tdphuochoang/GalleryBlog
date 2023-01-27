@@ -7,20 +7,17 @@ import { client } from "../client";
 import Pins from "./Pins";
 import logo from "../image/galleria-logo-black.png";
 import { userQuery } from "../utils/data";
+import { fetchUser } from "../utils/fetchUser";
 
 const Home = () => {
 	const [toggleSidebar, setToggleSidebar] = useState(false);
 	const [user, setUser] = useState(null);
 
-	const userInfo =
-		localStorage.getItem("user") !== "undefined"
-			? JSON.parse(localStorage.getItem("user"))
-			: localStorage.clear();
+	const userInfo = fetchUser();
 
 	const scrollRef = useRef(null);
 
 	useEffect(() => {
-		console.log(userInfo?.sub);
 		const query = userQuery(userInfo?.sub);
 		client.fetch(query).then((data) => {
 			setUser(data[0]);
