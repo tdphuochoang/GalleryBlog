@@ -3,21 +3,13 @@ import { NavLink, Link } from "react-router-dom";
 import { RiHomeFill } from "react-icons/ri";
 import { IoIoArrowForward } from "react-icons/io";
 import logo from "../image/galleria-logo-black.png";
+import { categories } from "../utils/data";
 
 const isNotActiveStyle =
 	"flex items-center px-5 gap-3 text-gray-500 hover:text-black transation-all duration-200 ease-in-out capitalize";
 
 const isActiveStyle =
 	"flex items-center px-5 gap-3 font-extrabold border-r-2 border-black transation-all duration-200 ease-in-out capitalize";
-
-const categories = [
-	{ name: "Animals" },
-	{ name: "Wallpapers" },
-	{ name: "Photography" },
-	{ name: "Gaming" },
-	{ name: "Coding" },
-	{ name: "Other" },
-];
 
 const SideBar = ({ user, closeToggle }) => {
 	const handleCloseSideBar = () => {
@@ -57,6 +49,11 @@ const SideBar = ({ user, closeToggle }) => {
 							to={`/category/${category.name}`}
 							key={category.name}
 						>
+							<img
+								src={category.image}
+								className="w-8 h-8 rounded-full shadow-sm"
+								alt="category"
+							/>
 							{category.name}
 						</NavLink>
 					))}
